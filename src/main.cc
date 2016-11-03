@@ -1,24 +1,30 @@
 #include <SFML/Graphics.hpp>
+#include <iostream>
+
+#include "GameObject.hh"
+#include "Engine.hh"
 
 int main() {
-	sf::RenderWindow window(sf::VideoMode(200, 200), "Hello World");
+	Engine *engine = new Engine();
+	engine->init();
+
 	sf::CircleShape shape(100.f);
 	shape.setFillColor(sf::Color::Green);
 
-	while (window.isOpen()) {
+	engine->graphics()->addToScene(&shape);
+	
+	while (engine->isRunning()) {
 		sf::Event event;
-		while (window.pollEvent(event)) {
+		while (engine->pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				window.close();
+				engine->close();
 				continue;
 			}
 		}
 
-		window.clear();
-		window.draw(shape);
-		window.display();
+		engine->graphics()->render();
 	}
-	
+
 	return 0;
 }
 
