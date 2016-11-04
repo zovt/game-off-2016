@@ -1,17 +1,16 @@
 #include <SFML/Graphics.hpp>
-#include <iostream>
+#include <memory>
 
 #include "GameObject.hh"
 #include "Engine.hh"
 
 int main() {
-	Engine *engine = new Engine();
+	auto engine = std::make_unique<Engine>();
 	engine->init();
 
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Green);
+	auto shape = std::make_shared<sf::CircleShape>(100.f);
+	shape->setFillColor(sf::Color::Green);
 
-	engine->graphics()->addToScene(&shape);
 	
 	while (engine->isRunning()) {
 		sf::Event event;
@@ -22,6 +21,7 @@ int main() {
 			}
 		}
 
+		engine->graphics()->add(shape);
 		engine->graphics()->render();
 	}
 

@@ -2,6 +2,7 @@ add_executable(${EXECUTABLE_NAME}
 	GameObject.cc
 	Graphics.cc
 	Engine.cc
+	World.cc
 
 	main.cc
 	)
