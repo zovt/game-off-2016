@@ -4,14 +4,16 @@
 
 class Engine {
 	public:
-		void init();
+		Engine();
+		~Engine();
+
 		void close();
 
-		std::shared_ptr<Graphics> graphics() const noexcept;
-		bool pollEvent(sf::Event &event) const;
+		Graphics graphics() const noexcept;
+		bool pollEvent(sf::Event &event);
 		bool isRunning() const;
 
 	private:
-		std::shared_ptr<sf::RenderWindow> window;
-		std::shared_ptr<Graphics> _graphics;
+		sf::RenderWindow window;
+		Graphics _graphics;
 };

@@ -5,24 +5,22 @@
 #include "Engine.hh"
 
 int main() {
-	auto engine = std::make_unique<Engine>();
-	engine->init();
+	Engine engine;
 
 	auto shape = std::make_shared<sf::CircleShape>(100.f);
 	shape->setFillColor(sf::Color::Green);
-
 	
-	while (engine->isRunning()) {
+	while (engine.isRunning()) {
 		sf::Event event;
-		while (engine->pollEvent(event)) {
+		while (engine.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				engine->close();
+				engine.close();
 				continue;
 			}
 		}
 
-		engine->graphics()->add(shape);
-		engine->graphics()->render();
+		engine.graphics()->add(shape);
+		engine.graphics()->render();
 	}
 
 	return 0;

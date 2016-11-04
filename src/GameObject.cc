@@ -1,6 +1,6 @@
 #include "GameObject.hh"
 
-GameObject::GameObject(std::shared_ptr<sf::Drawable> drawable) {
+GameObject::GameObject(sf::Drawable const &drawable) {
 	this->id = GameObject::currentID;
 	this->drawable = drawable;
 
