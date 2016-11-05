@@ -7,8 +7,8 @@
 int main() {
 	Engine engine;
 
-	auto shape = std::make_shared<sf::CircleShape>(100.f);
-	shape->setFillColor(sf::Color::Green);
+	sf::CircleShape shape = sf::CircleShape(100.f);
+	shape.setFillColor(sf::Color::Green);
 	
 	while (engine.isRunning()) {
 		sf::Event event;
@@ -19,8 +19,8 @@ int main() {
 			}
 		}
 
-		engine.graphics()->add(shape);
-		engine.graphics()->render();
+		engine.graphics().add(&shape);
+		engine.graphics().render();
 	}
 
 	return 0;

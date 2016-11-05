@@ -9,7 +9,7 @@ class Engine {
 
 		void close();
 
-		Graphics graphics() const noexcept;
+		Graphics& graphics() noexcept;
 		bool pollEvent(sf::Event &event);
 		bool isRunning() const;
 

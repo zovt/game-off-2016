@@ -1,19 +1,20 @@
 #include "Graphics.hh"
 
-Graphics::Graphics(sf::RenderWindow const &window) : window(window) { }
+Graphics::Graphics(std::unique_ptr<sf::RenderWindow> window) 
+	: window(std::move(window)) { }
 
 void Graphics::add(sf::Drawable * const drawable) {
 	this->scene.insert(drawable);
 }
 
 void Graphics::render() {
-	this->window.clear();
+	this->window->clear();
 
-	for (auto it = this->scene.begin(); it != this->scene.end(); it++) {
-		this->window.draw(**it);
+	for (auto obj : this->scene) {
+		this->window->draw(*obj);
 	}
 
-	this->window.display();
+	this->window->display();
 
 	this->scene.clear();
 }

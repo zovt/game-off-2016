@@ -2,7 +2,7 @@
 
 Engine::Engine() 
 	: window(sf::VideoMode(800, 600), ""),
-	_graphics(this->window) { }
+	_graphics(std::unique_ptr<sf::RenderWindow>(&this->window)) { }
 
 Engine::~Engine() {
 	this->close();
@@ -12,7 +12,7 @@ void Engine::close() {
 	this->window.close();
 }
 
-Graphics Engine::graphics() const noexcept {
+Graphics& Engine::graphics() noexcept {
 	return this->_graphics;
 }
 
