@@ -2,7 +2,7 @@
 
 Engine::Engine() 
 	: window(sf::VideoMode(800, 600), ""),
-	_graphics(std::unique_ptr<sf::RenderWindow>(&this->window)) { }
+	_graphics(this->window) { }
 
 Engine::~Engine() {
 	this->close();

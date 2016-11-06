@@ -1,26 +1,26 @@
 #include "World.hh"
 
-void World::init() {
-
+World::World(int screenX, int screenY) {
+	this->screenX = screenX;
+	this->screenY = screenY;
 }
 
 void World::update() {
-	std::vector<std::unique_ptr<GameObject>> newObjects;
+	std::vector<GameObject> newObjects;
 
-	for (auto idx = this->objects.begin(); idx != this->objects.end(); idx++) {
-		std::unique_ptr<GameObject> &obj = *idx;
-		obj->update();
+	for (GameObject obj : this->objects) {
+		obj.update();
 
-		if (!obj->shouldDelete()) {
-			newObjects.push_back(std::move(obj));
+		if (!obj.shouldDelete()) {
+			newObjects.push_back(obj);
 		}
 	}
 
 	this->objects.swap(newObjects);
 }
 
-void World::drawInto(std::shared_ptr<Graphics> graphics) {
-	for (std::unique_ptr<GameObject> &obj : this->objects) {
-		graphics->add(obj->getDrawable());
+void World::drawInto(Graphics &graphics) {
+	for (GameObject &obj : this->objects) {
+		graphics.add(std::make_unique<sf::Drawable>(obj.getDrawable()));
 	}
 }

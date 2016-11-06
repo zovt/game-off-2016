@@ -7,10 +7,13 @@
 
 class World {
 	public:
-		void init();
+		World(int screenX, int screenY);
+
 		void update();
-		void drawInto(std::shared_ptr<Graphics> graphics);
+		void drawInto(Graphics &graphics);
 
 	private:
-		std::vector<std::unique_ptr<GameObject>> objects;
+		std::vector<GameObject> objects;
+		int screenX;
+		int screenY;
 };

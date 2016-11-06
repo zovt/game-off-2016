@@ -4,13 +4,13 @@
 
 class Graphics {
 	public:
-		Graphics(std::unique_ptr<sf::RenderWindow> const window);
+		Graphics(sf::RenderWindow &window);
 
-		void add(sf::Drawable * const drawable);
+		void add(sf::Drawable *drawable);
 
 		void render();
 
 	private:
 		std::set<const sf::Drawable*> scene;
-		const std::unique_ptr<sf::RenderWindow> window;
+		sf::RenderWindow &window;
 };
