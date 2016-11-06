@@ -1,22 +1,22 @@
+#pragma once
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-class GameObject : public sf::Transformable, public sf::Drawable {
+class GameObject {
 	public:
-		GameObject(sf::Drawable &drawable);
+		GameObject(std::unique_ptr<sf::Drawable> drawable);
+		virtual ~GameObject() {}
 
-		int getID() const;
-		const sf::Drawable& getDrawable() const;
+		virtual void update() = 0;
+		virtual bool shouldDelete() const = 0;
 
-		void update();
-		bool shouldDelete() const;
+		sf::Drawable& getDrawable();
+
+		const int id;
 
 	protected:
-		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
+		std::unique_ptr<sf::Drawable> drawable;
 
 	private:
-		int id;
-		sf::Drawable &drawable;
-
 		static int currentID;
 };

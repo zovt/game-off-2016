@@ -1,7 +1,7 @@
 #include "Engine.hh"
 
-Engine::Engine() 
-	: window(sf::VideoMode(800, 600), ""),
+Engine::Engine(int width, int height) 
+	: window(sf::VideoMode(width, height), "Axcend"),
 	_graphics(this->window) { }
 
 Engine::~Engine() {

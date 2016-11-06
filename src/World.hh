@@ -13,7 +13,7 @@ class World {
 		void drawInto(Graphics &graphics);
 
 	private:
-		std::vector<GameObject> objects;
+		std::vector<std::unique_ptr<GameObject>> objects;
 		int screenX;
 		int screenY;
 };

@@ -1,15 +1,13 @@
 #include <SFML/Graphics.hpp>
 #include <memory>
 
-#include "GameObject.hh"
+#include "World.hh"
 #include "Engine.hh"
 
 int main() {
 	Engine engine;
+	World world(800, 600);
 
-	sf::CircleShape shape = sf::CircleShape(100.f);
-	shape.setFillColor(sf::Color::Green);
-	
 	while (engine.isRunning()) {
 		sf::Event event;
 		while (engine.pollEvent(event)) {
@@ -19,7 +17,7 @@ int main() {
 			}
 		}
 
-		engine.graphics().add(&shape);
+		world.drawInto(engine.graphics());
 		engine.graphics().render();
 	}
 

@@ -3,7 +3,7 @@
 Graphics::Graphics(sf::RenderWindow &window) 
 	: window(window) { }
 
-void Graphics::add(sf::Drawable *drawable) {
+void Graphics::add(const sf::Drawable * const drawable) {
 	this->scene.insert(drawable);
 }
 
