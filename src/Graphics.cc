@@ -15,7 +15,5 @@ void Graphics::render() {
 	}
 
 	this->window.display();
-
-	this->scene.clear();
 }
 

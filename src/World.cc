@@ -9,9 +9,9 @@ World::World(int screenX, int screenY) {
 }
 
 void World::update() {
-	std::vector<std::unique_ptr<GameObject>> newObjects;
+	std::vector<std::unique_ptr<GameObject<void>>> newObjects;
 
-	for (std::unique_ptr<GameObject> &obj : this->objects) {
+	for (std::unique_ptr<GameObject<void>> &obj : this->objects) {
 		obj->update();
 
 		if (!obj->shouldDelete()) {
@@ -22,8 +22,8 @@ void World::update() {
 	this->objects.swap(newObjects);
 }
 
-void World::drawInto(Graphics &graphics) {
-	for (std::unique_ptr<GameObject> &obj : this->objects) {
-		graphics.add(&obj->getDrawable());
+void World::draw(sf::RenderTarget &target, sf::RenderStates states) const {
+	for (const std::unique_ptr<GameObject<sf::Drawable>> &obj : this->objects) {
+		target.draw(obj->getDrawable(), states);
 	}
 }

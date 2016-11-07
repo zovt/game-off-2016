@@ -5,8 +5,13 @@
 #include "Engine.hh"
 
 int main() {
-	Engine engine;
-	World world(800, 600);
+	int width = 800;
+	int height = 600;
+
+	Engine engine(width, height);
+	World world(width, height);
+
+	engine.graphics().add(&world);
 
 	while (engine.isRunning()) {
 		sf::Event event;
@@ -17,7 +22,7 @@ int main() {
 			}
 		}
 
-		world.drawInto(engine.graphics());
+		world.update();
 		engine.graphics().render();
 	}
 
