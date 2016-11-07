@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
 #include "GameObject.hh"
 
-class Player : private sf::RectangleShape, public GameObject {
+class Axe : public GameObject, public sf::CircleShape {
 	public:
-		Player(int x, int y);
+		Axe(int x, int y);
 
 		void update() override;
 		bool shouldDelete() const override;

@@ -1,6 +1,8 @@
 add_executable(${EXECUTABLE_NAME}
 	GameObject.cc
 	Player.cc
+	Axe.cc
+	Platform.cc
 	Graphics.cc
 	Engine.cc
 	World.cc

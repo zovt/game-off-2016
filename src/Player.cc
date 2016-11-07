@@ -1,12 +1,17 @@
 #include "Player.hh"
 
-Player::Player() : 
-	GameObject(std::make_unique<sf::RectangleShape>(sf::Vector2f(20, 20))) { }
+Player::Player(int x, int y) : 
+	sf::RectangleShape(sf::Vector2f(20, 20)), GameObject() {
+		this->setPosition(x, y);
+	}
 
 void Player::update() {
-	this->getTransformable().setPosition(100, 100);
 }
 
 bool Player::shouldDelete() const {
 	return false;
+}
+
+const sf::Drawable* Player::asDrawable() const {
+	return (sf::RectangleShape*)(this);
 }

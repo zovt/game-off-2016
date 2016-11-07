@@ -2,36 +2,21 @@
 #include <memory>
 #include <SFML/Graphics.hpp>
 
-#include "Object2D.hh"
-
-class GameObject {
+class GameObject : public sf::Drawable {
 	public:
-		GameObject(std::unique_ptr<Object2D> object) :
-			id(GameObject::currentID),
-			object(std::move(object)) {
-				GameObject::currentID++;
-			}
-
+		GameObject();
 		virtual ~GameObject() {}
 
 		virtual void update() = 0;
 		virtual bool shouldDelete() const = 0;
 
-		sf::Drawable& getDrawable() {
-			return *this->object;
-		}
-
-		sf::Transformable& getTransformable() {
-			return *this->object;
-		}
+		void draw(sf::RenderTarget &target, sf::RenderStates states) const;
 
 		const int id;
 
 	protected:
-		std::unique_ptr<Object2D> object;
+		virtual const sf::Drawable* asDrawable() const = 0;
 
 	private:
 		static int currentID;
 };
-
-int GameObject::currentID = 0;

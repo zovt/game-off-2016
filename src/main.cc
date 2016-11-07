@@ -3,6 +3,7 @@
 
 #include "World.hh"
 #include "Engine.hh"
+#include "Player.hh"
 
 int main() {
 	int width = 800;
