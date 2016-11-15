@@ -1,32 +1,25 @@
 #include <SFML/Graphics.hpp>
-#include <memory>
+#include <iostream>
 
-#include "World.hh"
-#include "Engine.hh"
-#include "Player.hh"
+#include "graphics.hh"
+#include "world.hh"
 
 int main() {
-	int width = 800;
-	int height = 600;
+	sf::RenderWindow window(sf::VideoMode(800, 600), "Axcend");
+	Graphics graphics(window);
+	World world;
 
-	Engine engine(width, height);
-	World world(width, height);
-
-	engine.graphics().add(&world);
-
-	while (engine.isRunning()) {
+	while (window.isOpen()) {
 		sf::Event event;
-		while (engine.pollEvent(event)) {
+		while (window.pollEvent(event)) {
 			if (event.type == sf::Event::Closed) {
-				engine.close();
-				continue;
+				window.close();
 			}
 		}
 
-		world.update();
-		engine.graphics().render();
+		clearGraphics(graphics);
+		drawWorld(world, graphics);
+		render(graphics);
 	}
-
 	return 0;
 }
-

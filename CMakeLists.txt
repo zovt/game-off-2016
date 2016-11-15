@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.3 FATAL_ERROR)
 
 # Set up project
-project(game-jam-2016 VERSION 0.1 LANGUAGES CXX)
+project(axcend VERSION 0.1 LANGUAGES CXX)
 
 # Set compiler flags (bad practice, TODO: Fix this)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g")
@@ -11,4 +11,3 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -g")
 set(EXECUTABLE_NAME main)
 
 add_subdirectory(src/)
-
