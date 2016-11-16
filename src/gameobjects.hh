@@ -24,9 +24,9 @@ struct Collider {
 	Bounds bounds;
 };
 
-struct GameObject {
-	typedef sf::Drawable& (*DrawMethod)(const GameObject &object);
 
+struct GameObject {
+	typedef sf::Drawable& (*DrawMethod)(const Position &position);
 	GameObject(Position position, DrawMethod draw);
 
 	Position position;
