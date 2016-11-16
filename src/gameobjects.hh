@@ -19,7 +19,10 @@ struct Box {
 
 sf::Vector2f boxToVec2f(const Box &box);
 
+struct GameObject;
+
 struct Collider {
+	typedef void (*CollisionHandler)(const GameObject &collided);
 	Collider(Position &position, Box &box);
 
 	Position &position;
@@ -27,9 +30,11 @@ struct Collider {
 };
 
 struct GameObject {
-	typedef const std::unique_ptr<sf::Drawable> (*DrawMethod)(const Position &position, const Box &size);
-	typedef void (*UpdateMethod)(GameObject &obj);
-	GameObject(Position position, Box size, DrawMethod draw, UpdateMethod update);
+	typedef const std::unique_ptr<sf::Drawable> (&DrawMethod)(const GameObject &obj);
+	typedef void (&UpdateMethod)(GameObject &obj);
+	typedef bool (&ShouldDeleteMethod)(const GameObject &obj);
+
+	GameObject(Position position, Box size);
 
 	int id;
 	Position position;
@@ -37,10 +42,10 @@ struct GameObject {
 	Collider collider;
 	DrawMethod draw;
 	UpdateMethod update;
+	ShouldDeleteMethod shouldDelete;
 };
 
 void moveTo(GameObject &gameObject, const float x, const float y);
 void moveD(GameObject &gameObject, const float xOffset, const float yOffset);
-
 
 GameObject makePlayer(const Position &position);

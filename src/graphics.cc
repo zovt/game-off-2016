@@ -8,7 +8,7 @@ void render(Graphics &graphics) {
 	graphics.window.clear();
 
 	for (GameObject &g : graphics.objects) {
-		graphics.window.draw(*g.draw(g.position, g.size));
+		graphics.window.draw(*g.draw(g));
 	}
 
 	graphics.window.display();
