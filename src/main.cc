@@ -18,8 +18,10 @@ int main() {
 		}
 
 		clearGraphics(graphics);
+		updateWorld(world);
 		drawWorld(world, graphics);
 		render(graphics);
 	}
+
 	return 0;
 }

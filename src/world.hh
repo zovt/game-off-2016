@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 
+#include "graphics.hh"
 #include "gameobjects.hh"
 
 struct World {
@@ -10,3 +11,4 @@ struct World {
 };
 
 void drawWorld(const World &world, Graphics &graphics);
+void updateWorld(World &world);
