@@ -7,7 +7,7 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "Axcend");
 	Graphics graphics(window);
-	World world;
+	World world(Box(800, 600));
 
 	while (window.isOpen()) {
 		sf::Event event;
