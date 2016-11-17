@@ -1,4 +1,5 @@
 #include <SFML/Graphics.hpp>
+#include <chrono>
 #include <iostream>
 
 #include "graphics.hh"
@@ -9,6 +10,8 @@ int main() {
 	Graphics graphics(window);
 	World world(Box(800, 600));
 
+	auto prevTime = std::chrono::high_resolution_clock().now();
+	std::chrono::microseconds lag = std::chrono::microseconds::zero();
 	while (window.isOpen()) {
 		sf::Event event;
 		while (window.pollEvent(event)) {
@@ -18,7 +21,16 @@ int main() {
 		}
 
 		clearGraphics(graphics);
-		updateWorld(world);
+
+		auto currentTime = std::chrono::high_resolution_clock().now();
+		auto timeDelta = std::chrono::duration_cast<std::chrono::microseconds>(currentTime.time_since_epoch() - prevTime.time_since_epoch());
+		lag += timeDelta;
+		prevTime = currentTime;
+		if (lag >= MS_PER_UPDATE) {
+			updateWorld(world);
+			lag -= MS_PER_UPDATE;
+		}
+
 		drawWorld(world, graphics);
 		render(graphics);
 	}

@@ -1,7 +1,7 @@
 add_executable(${EXECUTABLE_NAME}
 	graphics.cc
-	world.cc
 	gameobjects.cc
+	world.cc
 
 	main.cc
 	)
