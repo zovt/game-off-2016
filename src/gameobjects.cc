@@ -49,3 +49,5 @@ void updatePlayer(GameObject &player) {
 GameObject makePlayer(const Position &position) {
 	return GameObject(position, Box(24, 24), &drawPlayer, &updatePlayer);
 }
+
+GameObject 

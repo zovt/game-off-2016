@@ -5,9 +5,10 @@
 #include "gameobjects.hh"
 
 struct World {
-	World();
+	World(const Box &dimensions);
 
 	std::vector<GameObject> objects;
+	const Box &dimensions;
 };
 
 void drawWorld(const World &world, Graphics &graphics);

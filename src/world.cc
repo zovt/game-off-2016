@@ -1,8 +1,11 @@
 #include "world.hh"
 #include "gameobjects.hh"
 
-World::World() {
-	this->objects.push_back(makePlayer(Position(50, 50)));
+World::World(const Box &dimensions) : dimensions(dimensions) {
+	this->objects.push_back(makePlayer(Position(dimensions.width / 2,
+					dimensions.height / 2)));
+	this->objects.push_back(makePlatform(Position(dimensions.width / 2,
+					dimensions.height / 2)));
 }
 
 void drawWorld(const World &world, Graphics &graphics) {

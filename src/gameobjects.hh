@@ -44,3 +44,4 @@ void moveD(GameObject &gameObject, const float xOffset, const float yOffset);
 
 
 GameObject makePlayer(const Position &position);
+GameObject makePlatform(const Position &position);
