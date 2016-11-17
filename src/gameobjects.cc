@@ -19,10 +19,26 @@ sf::Vector2f boxToVec2f(const Box &box) {
 Collider::Collider(Position &position, Box &box) 
 	: position(position), box(box) { }
 
+void updateDefault(GameObject &obj) {
+	return;
+}
+
+bool shouldDeleteDefault(GameObject &obj) {
+	return false;
+}
+
+std::unique_ptr<sf::Drawable> drawDefault(const GameObject &obj) {
+	return std::make_unique<sf::RectangleShape>(sf::Vector2f(0, 0));
+}
+
 int currentID = 0;
-GameObject::GameObject(Position position, Box size, DrawMethod draw, UpdateMethod update)
-	: id(currentID), position(position), size(size), 
-	collider(position, size), draw(draw), update(update) { currentID += 1; }
+GameObject::GameObject(Position position, Box size)
+	: id(currentID), position(position), size(size), collider(position, size) { 
+		currentID += 1;
+		this->draw = &drawDefault;
+		this->update = &updateDefault;
+		this->shouldDelete = &shouldDeleteDefault;
+	}
 
 
 void moveTo(GameObject &gameObject, const float x, const float y) {
@@ -47,7 +63,9 @@ void updatePlayer(GameObject &player) {
 }
 
 GameObject makePlayer(const Position &position) {
-	return GameObject(position, Box(24, 24), &drawPlayer, &updatePlayer);
+	GameObject player(position, Box(24, 24));
+	player.update = updatePlayer;
+	player.draw = drawPlayer;
 }
 
 GameObject 
